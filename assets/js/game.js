@@ -1,3 +1,4 @@
+//This function simulates fighting a robot.
 var fight = function (enemy) {
   while (playerInfo.health > 0 && enemy.health> 0) {
     //Alert players that they are starting the round
@@ -56,7 +57,7 @@ var fight = function (enemy) {
     }
   };
 
-
+//Starts fight with enemy robot and offers shop option
 var startGame = function () {
   //Reset player stats
   playerInfo.reset();
@@ -87,6 +88,7 @@ var startGame = function () {
   endGame();
 };
 
+//Displays after player beats all robots or dies.
 var endGame = function () {
   //If player is alive, they win
   if (playerInfo.health > 0) {
@@ -107,6 +109,7 @@ var endGame = function () {
   }
 };
 
+//The shop option after each round
 var shop = function() {
   var shopOptionPrompt = window.prompt(
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
@@ -135,14 +138,24 @@ var shop = function() {
   }
 };
 
+//Random number generator
 var randomNumber = function (min,max){
   var value = Math.floor(Math.random()*(max - min + 1) + min);
   
   return value;
 };
 
+//Rejects blank and null/cancel options.
+var getPlayerName = function() {
+  var name="";
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+};
+
+//Player stats
 var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
+  name: getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
@@ -173,7 +186,7 @@ var playerInfo = {
   }
 };
   
-
+//Enemy stats
 var enemyInfo = [
   {
     name: "Roborto",
@@ -190,5 +203,5 @@ var enemyInfo = [
 ];
   
   
-  
+
 startGame();
