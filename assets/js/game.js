@@ -79,8 +79,7 @@ var fight = function (enemy) {
       }
     }
     isPlayerTurn = !isPlayerTurn;    
-
-    }
+  }
 };
 
 //Starts fight with enemy robot and offers shop option
@@ -125,6 +124,28 @@ var endGame = function () {
     window.alert("You've lost your robot in battle.");
   }
   
+  //Compare player score to high score and store player score if they achieve new high score
+  var highScore = localStorage.getItem("highscore")
+  
+  if(highScore === null) {
+    highScore = 0;
+  }
+
+  if(playerInfo.money > highScore){
+    window.alert("Congratulations, you have beat the current high score of " + highScore + " with a score of " + playerInfo.money);
+    localStorage.setItem("highscore", playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+  }
+
+  else{
+    var Name = localStorage.getItem("name");
+    if (Name === null) {
+      Name = "Nobody"
+    }
+    window.alert("You did not beat the high score of " + highScore + " which was set by" + Name + ".");
+  }
+
+  //Ask player if they wnat to play again
   var playAgainConfirm = window.confirm ("Would you like to play again?");
 
   if (playAgainConfirm) {
@@ -133,6 +154,7 @@ var endGame = function () {
   else{
     window.alert("Thank you for playing Robot Gladiators! Come back soon!")
   }
+  
 };
 
 //The shop option after each round
